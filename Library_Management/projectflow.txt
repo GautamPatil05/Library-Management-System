@@ -1,0 +1,111 @@
+Flow for Library Management System
+1. Database Schema
+Books Table
+
+book_id (Primary Key, Auto-increment)
+title
+author
+genre
+price
+status (e.g., Available, Issued)
+Users Table
+
+user_id (Primary Key, Auto-increment)
+username
+password
+email
+role (e.g., Admin, User)
+status (e.g., Pending, Approved)
+IssuedBooks Table
+
+issue_id (Primary Key, Auto-increment)
+book_id (Foreign Key)
+user_id (Foreign Key)
+issue_date
+return_date
+status (e.g., Issued, Returned)
+2. Pages and Functionalities
+Home Page
+
+Links to Admin Login, User Login, and User Sign-Up pages.
+Admin Login Page
+
+Form to enter username and password.
+On successful login, redirect to Admin Dashboard.
+User Login Page
+
+Form to enter username and password.
+On successful login, redirect to User Dashboard.
+User Sign-Up Page
+
+Form to enter username, password, and email.
+On submission, store user details in the Users table with status as 'Pending'.
+Notify admin for user approval.
+Admin Dashboard
+
+Manage Books: Add, View, Update, and Delete books.
+Manage Users: View Pending Users, Approve/Reject User Sign-Ups.
+View Issued Books: List of all issued books and their statuses.
+User Dashboard
+
+View Books: List of all available books.
+Issue Book: Request to issue a book.
+View Issued Books: List of books issued by the user and their statuses.
+Return Book: Request to return a book.
+Add Book Page
+
+Form to add a new book with fields for title, author, genre, and price.
+On submission, store book details in the Books table.
+View Books Page
+
+List of all books with details.
+Admin can delete or update book details.
+Users can see availability and issue books.
+Manage Users Page (Admin)
+
+List of all users with their statuses.
+Approve or reject pending user sign-ups.
+Issued Books Page (Admin)
+
+List of all issued books with user and book details.
+Update status of issued books (e.g., mark as returned).
+3. Controller Flow (Servlets)
+LoginServlet
+
+Handle login requests for both admin and users.
+Redirect to respective dashboards based on role.
+SignUpServlet
+
+Handle user sign-up requests.
+Insert user details into Users table with status 'Pending'.
+AdminDashboardServlet
+
+Display admin dashboard with links to manage books, users, and issued books.
+UserDashboardServlet
+
+Display user dashboard with links to view books, issue books, and view issued books.
+AddBookServlet
+
+Handle add book requests.
+Insert new book details into Books table.
+ViewBooksServlet
+
+Retrieve book details from Books table.
+Display on View Books page.
+ManageUsersServlet
+
+Retrieve user details from Users table.
+Display on Manage Users page.
+IssueBookServlet
+
+Handle book issue requests from users.
+Insert details into IssuedBooks table.
+ReturnBookServlet
+
+Handle book return requests from users.
+Update status in IssuedBooks table.
+4. Hibernate Configuration
+HibernateConfiguration Class
+Define Hibernate configuration settings.
+Provide database connection details.
+Configure entity classes and mappings.
